@@ -51,6 +51,11 @@ def _resolve_env_var(value: Optional[str]) -> Optional[str]:
 class LLMModelConfig:
     """Configuration for a single LLM model"""
 
+    # Backend selection
+    # "openai" uses the OpenAI-compatible API client.
+    # "codex" shells out to `codex exec` and returns its final answer.
+    backend: Optional[str] = None
+
     # API configuration
     api_base: str = None
     api_key: Optional[str] = None
@@ -91,6 +96,9 @@ class LLMModelConfig:
 @dataclass
 class LLMConfig(LLMModelConfig):
     """Configuration for LLM models"""
+
+    # Backend selection
+    backend: str = "openai"
 
     # API configuration
     api_base: str = "https://api.openai.com/v1"
@@ -170,6 +178,7 @@ class LLMConfig(LLMModelConfig):
         shared_config = {
             "api_base": self.api_base,
             "api_key": self.api_key,
+            "backend": self.backend,
             "temperature": self.temperature,
             "top_p": self.top_p,
             "max_tokens": self.max_tokens,
@@ -224,6 +233,7 @@ class LLMConfig(LLMModelConfig):
         shared_config = {
             "api_base": self.api_base,
             "api_key": self.api_key,
+            "backend": self.backend,
             "temperature": self.temperature,
             "top_p": self.top_p,
             "max_tokens": self.max_tokens,

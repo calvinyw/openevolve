@@ -1,0 +1,40 @@
+max_iterations: 2
+checkpoint_interval: 1
+log_level: "INFO"
+
+llm:
+  backend: "codex"
+  models:
+    - name: "codex"
+      weight: 1.0
+  evaluator_models:
+    - name: "codex"
+      weight: 1.0
+  timeout: 600
+  retries: 0
+
+prompt:
+  system_message: |
+    You are optimizing a geometric construction. The program returns 20 centers
+    for non-overlapping unit circles. Improve the centers to minimize the radius
+    of the circle centered at the origin that contains all 20 unit circles.
+    Keep the API unchanged: run_packing() must return 20 coordinate pairs.
+  num_top_programs: 1
+  num_diverse_programs: 1
+
+database:
+  population_size: 8
+  archive_size: 4
+  num_islands: 1
+  elite_selection_ratio: 0.25
+  exploration_ratio: 0.2
+  exploitation_ratio: 0.8
+
+evaluator:
+  timeout: 30
+  cascade_evaluation: false
+  parallel_evaluations: 1
+  use_llm_feedback: false
+
+diff_based_evolution: true
+max_code_length: 12000

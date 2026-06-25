@@ -122,6 +122,18 @@ class TestConfigFromDictWithOptionalParams(unittest.TestCase):
         for model in config.llm.models:
             self.assertEqual(model.temperature, 0.5)
 
+    def test_models_inherit_backend(self):
+        """Test that models inherit backend from parent config"""
+        config_dict = {
+            "llm": {
+                "backend": "codex",
+                "primary_model": "codex",
+            }
+        }
+        config = Config.from_dict(config_dict)
+        for model in config.llm.models:
+            self.assertEqual(model.backend, "codex")
+
 
 if __name__ == "__main__":
     unittest.main()

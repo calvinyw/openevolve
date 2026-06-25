@@ -7,6 +7,7 @@ import unittest
 from openevolve.llm.ensemble import LLMEnsemble
 from openevolve.config import LLMModelConfig
 from openevolve.llm.base import LLMInterface
+from openevolve.llm.codex import CodexLLM
 
 class TestLLMEnsemble(unittest.TestCase):
     def test_weighted_sampling(self):
@@ -61,6 +62,24 @@ class TestEnsembleInit(unittest.TestCase):
         self.assertEqual(ensemble.models[0].model, "a")
         self.assertEqual(ensemble.models[1].model, "b")
         self.assertEqual(ensemble.models[1].some_field, "value")
+
+    def test_codex_backend_initialization(self):
+        models = [
+            LLMModelConfig(
+                name="codex",
+                backend="codex",
+                timeout=60,
+                retries=0,
+                retry_delay=0,
+            ),
+        ]
+        ensemble = LLMEnsemble(models)
+        self.assertIsInstance(ensemble.models[0], CodexLLM)
+
+    def test_unknown_backend_raises(self):
+        models = [LLMModelConfig(name="x", backend="unknown")]
+        with self.assertRaises(ValueError):
+            LLMEnsemble(models)
 
 if __name__ == "__main__":
     unittest.main()

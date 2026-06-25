@@ -259,6 +259,15 @@ cd examples/circle_packing
 python ../../openevolve-run.py initial_program.py evaluator.py --config config_phase_1.yaml
 ```
 
+#### [Two Matrix Invariants 5x5](two_matrix_invariants_5x5/)
+**Task:** Optimize triples `(g, f, h)` for two generic 5-by-5 matrices  
+**Achievement:** Seed satisfies the first normalized annihilation loss via Cayley-Hamilton  
+**Key Lesson:** Samples real matrix specializations and supports optional symbolic algebra tools  
+```bash
+cd examples/two_matrix_invariants_5x5
+python ../../openevolve-run.py initial_program.py evaluator.py --config config.yaml
+```
+
 ### 🔧 Algorithm Discovery
 
 #### [Signal Processing](signal_processing/)

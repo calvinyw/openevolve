@@ -1,0 +1,33 @@
+{
+  "id": "2a8654f4-694a-435c-b8de-85a9f9ea7a6a",
+  "generation": 1,
+  "iteration": 1,
+  "timestamp": 1782357223.560359,
+  "parent_id": "05f2e69b-04d6-45d2-b092-643f313e0c6e",
+  "metrics": {
+    "combined_score": 0.39095207091166373,
+    "objective_loss": 1.5578583013209095,
+    "first_part_loss": 5.3958395999202965e-15,
+    "first_part_score": 0.9999999999999947,
+    "eval_to_zero_loss": 5.3958395999202965e-15,
+    "lambda_eval_to_zero": 1.0,
+    "sep_measure": 0.3609779141768351,
+    "sep_loss": 0.3609779141768351,
+    "lambda_sep": 1.0,
+    "orbit_zeroes_measure": 0.19688138714306902,
+    "orbit_zeroes_f_loss": 0.19688138714306902,
+    "lambda_orbit_zeroes_f": 1.0,
+    "not_central_measure": 1.0,
+    "not_central_loss": 0.9999990000010001,
+    "lambda_not_central": 1.0,
+    "not_central_epsilon": 1e-06,
+    "implemented_parts": 4.0,
+    "total_parts": 4.0,
+    "monic_error": 0.0,
+    "h_leading_abs": 0.0,
+    "candidate_complexity": 155.0,
+    "eval_time": 0.13114023208618164
+  },
+  "language": "python",
+  "saved_at": 1782357669.017337
+}

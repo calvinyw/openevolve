@@ -8,6 +8,7 @@ import random
 from typing import Dict, List, Optional, Tuple
 
 from openevolve.llm.base import LLMInterface
+from openevolve.llm.codex import CodexLLM
 from openevolve.llm.openai import OpenAILLM
 from openevolve.config import LLMModelConfig
 
@@ -22,7 +23,9 @@ class LLMEnsemble:
 
         # Initialize models from the configuration
         self.models = [
-            model_cfg.init_client(model_cfg) if model_cfg.init_client else OpenAILLM(model_cfg)
+            model_cfg.init_client(model_cfg)
+            if model_cfg.init_client
+            else self._init_model(model_cfg)
             for model_cfg in models_cfg
         ]
 
@@ -54,6 +57,14 @@ class LLMEnsemble:
                 )
             )
             logger._ensemble_logged = True
+
+    def _init_model(self, model_cfg: LLMModelConfig) -> LLMInterface:
+        backend = (getattr(model_cfg, "backend", None) or "openai").lower()
+        if backend == "openai":
+            return OpenAILLM(model_cfg)
+        if backend == "codex":
+            return CodexLLM(model_cfg)
+        raise ValueError(f"Unsupported LLM backend: {backend}")
 
     async def generate(self, prompt: str, **kwargs) -> str:
         """Generate text using a randomly selected model based on weights"""
